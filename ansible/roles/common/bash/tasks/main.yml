@@ -1,0 +1,13 @@
+---
+
+- name: lineinfile - /root/.bashrc - alias la
+  lineinfile:
+    path: /root/.bashrc
+    regex: '^alias la.*'
+    line: alias la="ls -alF"
+
+- name: lineinfile - /home/{{ ansible_user }}/.bashrc - alias la
+  lineinfile:
+    path: /home/{{ ansible_user }}/.bashrc
+    regex: '^alias la.*'
+    line: alias la="ls -alF"
