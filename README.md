@@ -55,6 +55,10 @@ Has 3 groups in it:
 * control - K8s control plane node
 * worker - K8s worker nodes
 
+**! ! !**
+
+`k8s-control` is used in ansible as host name, so better not change it in inventory file.
+
 ### common.all.yml
 
 Update packages to the latest version, add some bash aliases and bash completion for kubeadm and kubectl
@@ -86,4 +90,12 @@ Initialize K8s cluster:
 
 ```bash
 ansible-playbook -i inventories/lab.yml k8s.yml -t init
+```
+
+### k8s.yml - join
+
+Join worker nodes to the K8s cluster:
+
+```bash
+ansible-playbook -i inventories/lab.yml k8s.yml -t join
 ```
