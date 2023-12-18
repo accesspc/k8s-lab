@@ -7,3 +7,11 @@
   tags:
     - k8s
     - setup
+
+- name: K8s init
+  hosts: control
+  roles:
+    - k8s/init
+  tags:
+    - init
+    - k8s

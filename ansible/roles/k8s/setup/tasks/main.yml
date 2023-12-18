@@ -6,7 +6,9 @@
     path: /root/.state.cluster.setup
   register: cluster_setup
   tags:
-    - always
+    - containerd
+    - k8s
+    - system
 
 # System prep
 - name: System preparation
