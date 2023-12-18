@@ -1,0 +1,9 @@
+---
+
+- name: Common
+  hosts: k8s
+  roles:
+    - k8s/setup
+  tags:
+    - k8s
+    - setup

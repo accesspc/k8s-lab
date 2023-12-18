@@ -1,0 +1,35 @@
+---
+
+- name: stat - /root/.state.cluster.setup
+  stat:
+    path: /root/.state.cluster.setup
+  register: cluster_setup
+  tags:
+    - always
+
+- name: System preparation
+  import_tasks:
+    system.yml
+  tags:
+    - system
+
+- name: Intall containerd.io
+  import_tasks:
+    containerd.yml
+  tags:
+    - containerd
+
+- name: Intall k8s
+  import_tasks:
+    k8s.yml
+  tags:
+    - k8s
+
+- name: reboot
+  reboot: {}
+  when: not cluster_setup.stat.exists
+
+- name: file - touch /root/.state.cluster.setup
+  file:
+    path: /root/.state.cluster.setup
+    state: touch

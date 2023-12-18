@@ -39,7 +39,27 @@ Host k8s-worker2
 
 The few manual steps above is the only thing I've done manually, everything else is either ansible, or further down the line.
 
+### common.all
+
+Update packages to the latest version, add some bash aliases and bash completion for kubeadm and kubectl
+
 ```bash
-# Update packages to the latest version, add some bash aliases and bash completion for kubeadm and kubectl
 ansible-playbook -i inventories/lab.yml common.all.yml
+```
+
+### k8s.setup
+
+Run initial setup steps to prepare nodes:
+
+* Kernel modules
+* Sysctl config
+* Disable swap
+* Add docker repo to apt
+* Install containerd.io
+* Add kubernetes repo to apt
+* Install and hold kubeadm, kubectl and kubelet
+* REBOOT
+
+```bash
+ansible-playbook -i inventories/lab.yml k8s.yml -t setup
 ```
