@@ -8,4 +8,5 @@ common_apt_pkgs:
   - ca-certificates
   - curl
   - gnupg
+  - nfs-common
   - vim-nox
