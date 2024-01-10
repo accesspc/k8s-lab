@@ -24,17 +24,17 @@
   tags:
     - containerd
 
+# Reboot, if first time running
+- name: reboot
+  reboot: {}
+  when: not cluster_setup.stat.exists
+
 # Install K8s
 - name: Intall k8s
   import_tasks:
     k8s.yml
   tags:
     - k8s
-
-# Reboot, if first time running
-- name: reboot
-  reboot: {}
-  when: not cluster_setup.stat.exists
 
 # touch state file
 - name: file - touch /root/.state.cluster.setup

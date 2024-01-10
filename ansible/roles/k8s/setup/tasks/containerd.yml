@@ -33,10 +33,3 @@
 # Generate default config file
 - name: shell - containerd config default > /etc/containerd/config.toml
   shell: containerd config default > /etc/containerd/config.toml
-
-# Restart containerd service
-- name: systemd_service - containerd restarted
-  systemd_service:
-    daemon_reload: true
-    name: containerd
-    state: restarted
