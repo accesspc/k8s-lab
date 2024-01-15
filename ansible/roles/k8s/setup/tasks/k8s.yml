@@ -10,7 +10,6 @@
     repo: deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-apt-keyring.asc] https://pkgs.k8s.io/core:/stable:/v{{ k8s_release }}/deb/ /
     filename: kubernetes
     state: present
-    update_cache: true
 
 - name: apt - k8s packages
   apt:
@@ -19,6 +18,7 @@
       - kubectl={{ k8s_apt_version }}
       - kubelet={{ k8s_apt_version }}
     state: present
+    update_cache: true
 
 - name: dpkg_selections - hold
   dpkg_selections:
