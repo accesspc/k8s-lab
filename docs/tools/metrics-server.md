@@ -3,7 +3,7 @@
 Can be installed directly from a copy stored here locally:
 
 ```bash
-kubectl apply -f k8s/tools/metrics-server-components.yaml
+kubectl apply -f k8s/metrics-server/components.yaml
 ```
 
 or directly from github:
