@@ -12,11 +12,20 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/a
 
 [Official documentation](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)
 
-Create ServiceAccount and ClusterRoleBinding objects, then create a token for the new ServiceAccount admin-user in kubernetes-dashboard namespace:
+Create ServiceAccount, ClusterRoleBinding and Secret objects:
 
 ```bash
+kubectl apply -f k8s/dashboard/serviceaccount.yml
+kubectl apply -f k8s/dashboard/clusterrolebinding.yml
+kubectl apply -f k8s/dashboard/secret.yml
+# or
 kubectl apply -f k8s/dashboard/
-kubectl -n kubernetes-dashboard create token admin-user
+```
+
+Retrieve the Secret token for amdin-user in kubernetes-dashboard namespace
+
+```bash
+kubectl -n kubernetes-dashboard get secret admin-user -o jsonpath={".data.token"} | base64 -d ; echo
 ```
 
 ## Proxy
