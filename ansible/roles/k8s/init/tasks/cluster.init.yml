@@ -24,6 +24,7 @@
   copy:
     src: /etc/kubernetes/admin.conf
     dest: /root/.kube/config
+    mode: 0600
     remote_src: true
 
 # ansible_user
@@ -41,6 +42,7 @@
     remote_src: true
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
+    mode: 0600
 
 # Pause to become ready
 - name: pause - 15s
