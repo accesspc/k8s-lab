@@ -36,6 +36,14 @@
   tags:
     - k8s
 
+# Install Helm
+- name: Intall helm
+  import_tasks:
+    helm.yml
+  tags:
+    - helm
+  when: "'control' in group_names"
+
 # touch state file
 - name: file - touch /root/.state.cluster.setup
   file:
