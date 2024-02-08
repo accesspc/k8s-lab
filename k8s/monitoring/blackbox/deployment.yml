@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox
+  namespace: monitoring
+  labels:
+    app: blackbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blackbox
+  template:
+    metadata:
+      labels:
+        app: blackbox
+    spec:
+      containers:
+        - name: blackbox
+          image: prom/blackbox-exporter
+          ports:
+            - containerPort: 9115
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256M
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/blackbox_exporter
+      volumes:
+        - name: config-volume
+          configMap:
+            name: blackbox-config

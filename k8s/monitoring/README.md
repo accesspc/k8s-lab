@@ -1,46 +1,48 @@
 # Prometheus
 
-## Namespace
-
-```bash
-kubectl apply -f k8s/prometheus/namespace.yml
-```
-
-## ConfigMap
-
-```bash
-# Render preview
-kubectl kustomize k8s/prometheus/prometheus-conf
-
-# Apply
-kubectl apply -k k8s/prometheus/prometheus-conf
-```
-
-## RBAC
-
-```bash
-kubectl apply -f k8s/prometheus/clusterrole.yml
-kubectl apply -f k8s/prometheus/clusterrolebinding.yml
-```
-
-## Deployment
-
-```bash
-kubectl apply -f k8s/prometheus/deployment.yml
-```
-
-## Service
-
-```bash
-kubectl apply -f k8s/prometheus/service.yml
-```
-
 ## Access
 
-Once all recources are deployed, you can access Prometheus on any of the cluster nodes' IP addresses. Pick one from the list:
+Once all recources are deployed, you can access Prometheus and Grafana on any of the cluster nodes' IP addresses. Pick one from the list:
 
 ```bash
 kubectl get nodes -o wide
 ```
 
-Then open in your browser: http://<NODE_IP>:30090/
+## Namespace
+
+```bash
+kubectl apply -f k8s/monitoring/namespace.yml
+```
+
+## Blackbox
+
+```bash
+# ConfigMap: preview
+kubectl kustomize k8s/monitoring/blackbox/config/
+
+# Apply
+kubectl apply -k k8s/monitoring/blackbox/config/
+kubectl apply -f k8s/monitoring/blackbox/
+```
+
+## Prometheus
+
+```bash
+# ConfigMap: preview
+kubectl kustomize k8s/monitoring/prometheus/config
+
+# Apply
+kubectl apply -k k8s/monitoring/prometheus/config
+kubectl apply -f k8s/monitoring/prometheus
+```
+
+* Prometheus: http://<NODE_IP>:30090/
+
+## Grafana
+
+```bash
+# Apply
+kubectl apply -f k8s/monitoring/grafana
+```
+
+* Grafana: http://<NODE_IP>:30030/

@@ -2,10 +2,9 @@
 generatorOptions:
   disableNameSuffixHash: true
   labels:
-    name: prometheus-conf
+    name: prometheus-config
 configMapGenerator:
-  - name: prometheus-conf
+  - name: prometheus-config
     namespace: monitoring
     files:
-      # - prometheus.rules
       - prometheus.yml
