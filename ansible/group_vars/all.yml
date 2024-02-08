@@ -9,4 +9,5 @@ common_apt_pkgs:
   - curl
   - gnupg
   - nfs-common
+  - prometheus-node-exporter
   - vim-nox
