@@ -34,7 +34,7 @@ spec:
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 5
-            periodSeconds: 10
+            periodSeconds: 15
             successThreshold: 1
             httpGet:
               path: /
