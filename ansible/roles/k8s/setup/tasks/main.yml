@@ -1,5 +1,13 @@
 ---
 
+# Reset
+- name: Reset K8s node/cluster
+  import_tasks:
+    reset.yml
+  tags:
+    - never
+    - reset
+
 # check state file
 - name: stat - /root/.state.cluster.setup
   stat:
