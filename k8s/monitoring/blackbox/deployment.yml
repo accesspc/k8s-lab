@@ -21,6 +21,26 @@ spec:
           image: prom/blackbox-exporter
           ports:
             - containerPort: 9115
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 9115
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            httpGet:
+              path: /
+              port: 9115
+              scheme: HTTP
+            timeoutSeconds: 2
           resources:
             limits:
               cpu: 500m
