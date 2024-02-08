@@ -33,6 +33,11 @@ kubectl apply -f k8s/monitoring/snmp/
 
 ## Prometheus
 
+1. Obtains Tailscale auth key from [tailscale admin](https://login.tailscale.com/admin/settings/keys) website
+1. Base64 encode the key: `echo -n 'TAILSCALE_SECRET_KEY' | base64`
+1. copy `k8s/monitoring/secret.yml.sample` file to `k8s/monitoring/secret.yml`
+1. Put the base64 encoded key in `secret.yml` under `.data.TS_AUTHKEY`
+
 ```bash
 # ConfigMap: preview
 kubectl kustomize k8s/monitoring/prometheus/config
