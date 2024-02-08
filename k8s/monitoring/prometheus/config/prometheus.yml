@@ -148,3 +148,31 @@ scrape_configs:
       - source_labels: [__meta_kubernetes_service_name]
         action: replace
         target_label: kubernetes_name
+
+  - job_name: snmp
+    metrics_path: /snmp
+
+    params:
+      module:
+        - synology
+
+    relabel_configs:
+      - source_labels:
+          - __address__
+        target_label: __param_target
+      - source_labels:
+          - __param_target
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp.monitoring.svc.cluster.local:9116
+
+    static_configs:
+      - targets:
+          - store.local.reiciunas.dev
+
+  - job_name: telegraf
+
+    static_configs:
+      - targets:
+          - 192.168.68.2:9273
+          - 192.168.68.11:9273

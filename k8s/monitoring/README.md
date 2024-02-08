@@ -25,6 +25,12 @@ kubectl apply -k k8s/monitoring/blackbox/config/
 kubectl apply -f k8s/monitoring/blackbox/
 ```
 
+## SNMP
+
+```bash
+kubectl apply -f k8s/monitoring/snmp/
+```
+
 ## Prometheus
 
 ```bash

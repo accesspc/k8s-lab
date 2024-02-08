@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snmp
+  namespace: monitoring
+  labels:
+    app: snmp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snmp
+  template:
+    metadata:
+      labels:
+        app: snmp
+    spec:
+      containers:
+        - name: snmp
+          image: prom/snmp-exporter
+          ports:
+            - containerPort: 9115
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256M
