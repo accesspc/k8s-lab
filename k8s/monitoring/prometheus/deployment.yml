@@ -68,7 +68,7 @@ spec:
               mountPath: /etc/prometheus
             - name: data-volume
               mountPath: /prometheus
-        - name: tailscale
+        - name: sidecar-tailscale
           image: tailscale/tailscale
           imagePullPolicy: Always
           env:
