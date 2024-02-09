@@ -51,7 +51,8 @@ kubectl apply -f k8s/monitoring/prometheus
 
 ## Grafana
 
-[Grafana Dashboard Provisioning](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards)
+* [Grafana Dashboard Provisioning](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards)
+* [K8s-sidecar](https://github.com/kiwigrid/k8s-sidecar)
 
 All Grafana Dashboards are automatically provisioned from this repo. The whole process is as follows:
 
