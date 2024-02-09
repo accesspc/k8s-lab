@@ -51,8 +51,26 @@ kubectl apply -f k8s/monitoring/prometheus
 
 ## Grafana
 
+[Grafana Dashboard Provisioning](https://grafana.com/docs/grafana/latest/administration/provisioning/#dashboards)
+
+All Grafana Dashboards are automatically provisioned from this repo. The whole process is as follows:
+
+1. Dashboard JSON files are stored in [./grafana/dashboards/](./k8s/monitoring/grafana/dashboards/)
+1. `configMapGenerator` is used to generate ConfigMap for each dashboard, commands below to preview and apply changes
+1. Grafana Deployment has a sidecar container based on `kiwigrid/k8s-sidecar` image, that picks ConfigMaps selected by labels and creates files on shared volume
+1. Grafana Dashboard Provider, defined [here](./grafana/config/provider.yml), monitors the mounted shared volume and automatically applies ConfigMaps / dashboards changes, which are picked up by Grafana
+
 ```bash
+# ConfigMap: preview
+kubectl kustomize k8s/monitoring/grafana/config/
+kubectl kustomize k8s/monitoring/grafana/dashboards/
+kubectl kustomize k8s/monitoring/grafana/dashboards/kubernetes/
+
 # Apply
+kubectl apply -k k8s/monitoring/grafana/config/
+kubectl apply -k k8s/monitoring/grafana/dashboards/
+kubectl apply -k k8s/monitoring/grafana/dashboards/kubernetes/
+
 kubectl apply -f k8s/monitoring/grafana
 ```
 

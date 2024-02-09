@@ -52,9 +52,33 @@ spec:
               cpu: 1000m
               memory: 1Gi
           volumeMounts:
+            - name: config-volume
+              mountPath: /etc/grafana/provisioning/dashboards/provider.yml
+              subPath: provider.yml
+            - name: dashboards
+              mountPath: /etc/dashboards
             - name: data-volume
               mountPath: /var/lib/grafana
+        - name: sidecar-dashboards
+          image: kiwigrid/k8s-sidecar
+          env:
+            - name: LABEL
+              value: grafana_dashboard
+            - name: FOLDER
+              value: /etc/dashboards
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128M
+          volumeMounts:
+            - name: dashboards
+              mountPath: /etc/dashboards
       volumes:
+        - name: config-volume
+          configMap:
+            name: grafana-config
+        - name: dashboards
+          emptyDir: {}
         - name: data-volume
           persistentVolumeClaim:
             claimName: grafana-pvc
