@@ -176,6 +176,10 @@ scrape_configs:
           - 100.90.219.99:9100
         labels:
           instance: fw
+      - targets:
+          - 100.92.107.61:9100
+        labels:
+          instance: store
 
   - job_name: node-exporter
 
@@ -187,25 +191,25 @@ scrape_configs:
         regex: 'node-exporter'
         action: keep
 
-  - job_name: snmp
-    metrics_path: /snmp
+# - job_name: snmp
+#   metrics_path: /snmp
 
-    params:
-      module:
-        - synology
+#   params:
+#     module:
+#       - synology
 
-    relabel_configs:
-      - source_labels:
-          - __address__
-        target_label: __param_target
-      - source_labels:
-          - __param_target
-        target_label: instance
-      - target_label: __address__
-        replacement: snmp.monitoring.svc.cluster.local:9116
+#   relabel_configs:
+#     - source_labels:
+#         - __address__
+#       target_label: __param_target
+#     - source_labels:
+#         - __param_target
+#       target_label: instance
+#     - target_label: __address__
+#       replacement: snmp.monitoring.svc.cluster.local:9116
 
-    static_configs:
-      - targets:
-          - 100.92.107.61
-        labels:
-          instance: store
+#   static_configs:
+#     - targets:
+#         - 100.92.107.61
+#       labels:
+#         instance: store
