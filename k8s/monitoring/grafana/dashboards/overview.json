@@ -408,9 +408,9 @@
               "uid": "${datasource}"
             },
             "editorMode": "code",
-            "expr": "sum((node_filesystem_size_bytes{instance=~\"$instance\"} - node_filesystem_free_bytes{instance=~\"$instance\"}) / node_filesystem_size_bytes{instance=~\"$instance\"}) by (instance, mountpoint)",
+            "expr": "avg((node_filesystem_size_bytes{instance=~\"$instance\"} - node_filesystem_free_bytes{instance=~\"$instance\"}) / node_filesystem_size_bytes{instance=~\"$instance\"}) by (instance, device)",
             "instant": false,
-            "legendFormat": "{{instance}}: {{mountpoint}}",
+            "legendFormat": "{{instance}}: {{device}}",
             "range": true,
             "refId": "A"
           }
